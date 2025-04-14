@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Soumalya">
+
+<title>sghorui_OriginalHomeworkCode_04</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="sghorui_OriginalHomeworkCode_04_files/libs/clipboard/clipboard.min.js"></script>
+<script src="sghorui_OriginalHomeworkCode_04_files/libs/quarto-html/quarto.js"></script>
+<script src="sghorui_OriginalHomeworkCode_04_files/libs/quarto-html/popper.min.js"></script>
+<script src="sghorui_OriginalHomeworkCode_04_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="sghorui_OriginalHomeworkCode_04_files/libs/quarto-html/anchor.min.js"></script>
+<link href="sghorui_OriginalHomeworkCode_04_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="sghorui_OriginalHomeworkCode_04_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="sghorui_OriginalHomeworkCode_04_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="sghorui_OriginalHomeworkCode_04_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="sghorui_OriginalHomeworkCode_04_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">sghorui_OriginalHomeworkCode_04</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Soumalya </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="boots-for-days" class="level1">
+<h1><strong>Boots for Days!</strong></h1>
+<p>Create a new <strong><em>GitHub</em></strong> repo and git-referenced <strong><em>Rstudio</em></strong> Project called “<strong>AN588_Boots_BUlogin</strong>”. Within that repo, create a new <code>.Rmd</code> file called “<strong>BUlogin_OriginalHomeworkCode_04</strong>”. Don’t forget to add your <a href="https://fuzzyatelin.github.io/bioanth-stats/peercommentary.html">Peer Group</a> and instructor as collaborators, and to accept their invitations to you. Making sure to push both the markdown and knitted <code>.html</code> files to your repository, do the following:</p>
+<p>You are welcome to work <em>with your Peer Group together</em> on this homework assignment or on your own. If you work with someone else, please include all of your names in the header information for your <code>.Rmd</code> file.</p>
+<section id="bootstrapping-standard-errors-and-cis-for-linear-models." class="level3">
+<h3 class="anchored" data-anchor-id="bootstrapping-standard-errors-and-cis-for-linear-models.">Bootstrapping Standard Errors and CIs for Linear Models.</h3>
+<p>When we initially discussed the central limit theorem and confidence intervals, we showed how we could use bootstrapping to estimate standard errors and confidence intervals around certain parameter values, like the mean. Using bootstrapping, we could also do the same for estimating standard errors and CIs around regression parameters, such as 𝛽 coefficients.</p>
+<p>[1] Using the “KamilarAndCooperData.csv” dataset, run a linear regression looking at log(HomeRange_km2) in relation to log(Body_mass_female_mean) and report your 𝛽 coeffiecients (slope and intercept).</p>
+<p>[2] Then, use bootstrapping to sample from your data 1000 times with replacement, each time fitting the same model and calculating the same coefficients. This generates a sampling distribution for each 𝛽 coefficient.</p>
+<ul>
+<li><p>Estimate the standard error for each of your 𝛽 coefficients as the standard deviation of the sampling distribution from your bootstrap and determine the 95% CI for each of your 𝛽 coefficients based on the appropriate quantiles from your sampling distribution.</p></li>
+<li><p>How does the former compare to the SE estimated from your entire dataset using the formula for standard error implemented in <code>lm()</code>?</p></li>
+<li><p>How does the latter compare to the 95% CI estimated from your entire dataset?</p></li>
+</ul>
+<p><strong>EXTRA CREDIT</strong></p>
+<p>Write a FUNCTION that takes as its arguments a dataframe, “d”, a linear model, “m” (as a character string, e.g., “logHR~logBM”), a user-defined confidence interval level, “conf.level” (with default = 0.95), and a number of bootstrap replicates, “n” (with default = 1000). Your function should return a dataframe that includes: beta coefficient names; beta coefficients, standard errors, and upper and lower CI limits for the linear model based on your entire dataset; and mean beta coefficient estimates, SEs, and CI limits for those coefficients based on your bootstrap.</p>
+<p><strong>EXTRA EXTRA CREDIT</strong></p>
+<p>Graph each beta value from the linear model and its corresponding mean value, lower CI and upper CI from a bootstrap as a function of number of bootstraps from 10 to 200 by 10s. HINT: the beta value from the linear model will be the same for all bootstraps and the mean beta value may not differ that much!</p>
+<p>Here we go!</p>
+</section>
+<section id="loading-and-preparing-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="loading-and-preparing-the-data">Loading and Preparing the Data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)   <span class="co"># For data manipulation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># For plotting (extra credit)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)   <span class="co"># For reading CSV from URL # Loading the required libraries</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>KC <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/fuzzyatelin/fuzzyatelin.github.io/master/AN588_Fall23/KamilarAndCooperData.csv"</span>) <span class="co"># Reading the dataset directly from the URL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 213 Columns: 44</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (16): Scientific_Name, Family, Genus, Species, Brain_size_Ref, Mass_Ref,...
+dbl (28): Brain_Size_Species_Mean, Brain_Size_Female_Mean, Body_mass_male_me...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(KC) <span class="co"># Checking the structure of the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spc_tbl_ [213 × 44] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ Scientific_Name        : chr [1:213] "Allenopithecus_nigroviridis" "Allocebus_trichotis" "Alouatta_belzebul" "Alouatta_caraya" ...
+ $ Family                 : chr [1:213] "Cercopithecidae" "Cercopithecidae" "Atelidae" "Atelidae" ...
+ $ Genus                  : chr [1:213] "Allenopithecus" "Allocebus" "Alouatta" "Alouatta" ...
+ $ Species                : chr [1:213] "nigroviridis" "trichotis" "belzebul" "caraya" ...
+ $ Brain_Size_Species_Mean: num [1:213] 58 NA 52.8 52.6 51.7 ...
+ $ Brain_Size_Female_Mean : num [1:213] 53.7 NA 51.2 47.8 49.1 ...
+ $ Brain_size_Ref         : chr [1:213] "Isler et al 2008" NA "Isler et al 2008" "Isler et al 2008" ...
+ $ Body_mass_male_mean    : num [1:213] 6130 92 7270 6525 5800 ...
+ $ Body_mass_female_mean  : num [1:213] 3180 84 5520 4240 4550 5350 6430 5210 1230 NA ...
+ $ Mass_Dimorphism        : num [1:213] 1.93 1.09 1.32 1.54 1.27 ...
+ $ Mass_Ref               : chr [1:213] "Isler et al 2008" "Smith and Jungers 1997" "Isler et al 2008" "Isler et al 2008" ...
+ $ MeanGroupSize          : num [1:213] NA 1 7 8 6.53 12 6.6 7.1 3.1 3 ...
+ $ AdultMales             : num [1:213] NA 1 1 2.3 1.37 ...
+ $ AdultFemale            : num [1:213] NA 1 1 3.3 2.2 ...
+ $ AdultSexRatio          : num [1:213] NA NA 1 1.43 1.61 2.17 1.13 1.29 1 1 ...
+ $ Social_Organization_Ref: chr [1:213] NA "Kappeler 1997" "Campbell et al 2007" "van Schaik et al. 1999; Kappeler and Pereira 2003; Nunn &amp; van Schaik 2000" ...
+ $ InterbirthInterval_d   : num [1:213] NA NA NA 338 NA ...
+ $ Gestation              : num [1:213] NA NA NA 187 NA 186 187 190 NA NA ...
+ $ WeaningAge_d           : num [1:213] 106 NA NA 323 NA ...
+ $ MaxLongevity_m         : num [1:213] 276 NA NA 244 NA ...
+ $ LitterSz               : num [1:213] 1.01 1 NA 1.01 NA 1.02 1.01 1.42 1 NA ...
+ $ Life_History_Ref       : chr [1:213] "Jones et al. 2009" NA NA "Jones et al. 2009" ...
+ $ GR_MidRangeLat_dd      : num [1:213] -0.17 -16.59 -6.8 -20.34 -21.13 ...
+ $ Precip_Mean_mm         : num [1:213] 1574 1902 1644 1166 1332 ...
+ $ Temp_Mean_degC         : num [1:213] 25.2 20.3 24.9 22.9 19.6 23.7 25.1 25.1 24.6 NA ...
+ $ AET_Mean_mm            : num [1:213] 1518 1388 1287 1193 1226 ...
+ $ PET_Mean_mm            : num [1:213] 1589 1654 1550 1405 1332 ...
+ $ Climate_Ref            : chr [1:213] "Jones et al. 2009" "Jones et al. 2009" "Jones et al. 2009" "Jones et al. 2009" ...
+ $ HomeRange_km2          : num [1:213] NA NA NA NA 0.03 0.19 0.3 0.1 0.095 NA ...
+ $ HomeRangeRef           : chr [1:213] NA NA NA NA ...
+ $ DayLength_km           : num [1:213] NA NA NA 0.4 NA 0.32 NA 0.55 NA NA ...
+ $ DayLengthRef           : chr [1:213] NA NA NA "Nunn et al. 2003" ...
+ $ Territoriality         : num [1:213] NA NA NA NA NA ...
+ $ Fruit                  : num [1:213] NA NA 57.3 23.8 5.2 33.1 40.8 40 45 NA ...
+ $ Leaves                 : chr [1:213] NA NA "19.1" "67.7" ...
+ $ Fauna                  : chr [1:213] NA NA "0.0" "0.0" ...
+ $ DietRef1               : chr [1:213] NA NA "Campbell et al. 2007" "Campbell et al. 2007" ...
+ $ Canine_Dimorphism      : num [1:213] 2.21 NA 1.81 1.54 1.78 ...
+ $ Canine_Dimorphism_Ref  : chr [1:213] "Plavcan &amp; Ruff 2008" NA "Plavcan &amp; Ruff 2008" "Plavcan &amp; Ruff 2008" ...
+ $ Feed                   : num [1:213] NA NA 13.8 15.9 18.3 ...
+ $ Move                   : num [1:213] NA NA 18.8 17.6 14.3 ...
+ $ Rest                   : num [1:213] NA NA 57.3 61.6 64.4 ...
+ $ Social                 : num [1:213] NA NA 10 4.9 3 3.64 3.8 2.5 NA NA ...
+ $ Activity_Budget_Ref    : chr [1:213] NA NA "Campbell et al. 2007" "Campbell et al. 2007" ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   Scientific_Name = col_character(),
+  ..   Family = col_character(),
+  ..   Genus = col_character(),
+  ..   Species = col_character(),
+  ..   Brain_Size_Species_Mean = col_double(),
+  ..   Brain_Size_Female_Mean = col_double(),
+  ..   Brain_size_Ref = col_character(),
+  ..   Body_mass_male_mean = col_double(),
+  ..   Body_mass_female_mean = col_double(),
+  ..   Mass_Dimorphism = col_double(),
+  ..   Mass_Ref = col_character(),
+  ..   MeanGroupSize = col_double(),
+  ..   AdultMales = col_double(),
+  ..   AdultFemale = col_double(),
+  ..   AdultSexRatio = col_double(),
+  ..   Social_Organization_Ref = col_character(),
+  ..   InterbirthInterval_d = col_double(),
+  ..   Gestation = col_double(),
+  ..   WeaningAge_d = col_double(),
+  ..   MaxLongevity_m = col_double(),
+  ..   LitterSz = col_double(),
+  ..   Life_History_Ref = col_character(),
+  ..   GR_MidRangeLat_dd = col_double(),
+  ..   Precip_Mean_mm = col_double(),
+  ..   Temp_Mean_degC = col_double(),
+  ..   AET_Mean_mm = col_double(),
+  ..   PET_Mean_mm = col_double(),
+  ..   Climate_Ref = col_character(),
+  ..   HomeRange_km2 = col_double(),
+  ..   HomeRangeRef = col_character(),
+  ..   DayLength_km = col_double(),
+  ..   DayLengthRef = col_character(),
+  ..   Territoriality = col_double(),
+  ..   Fruit = col_double(),
+  ..   Leaves = col_character(),
+  ..   Fauna = col_character(),
+  ..   DietRef1 = col_character(),
+  ..   Canine_Dimorphism = col_double(),
+  ..   Canine_Dimorphism_Ref = col_character(),
+  ..   Feed = col_double(),
+  ..   Move = col_double(),
+  ..   Rest = col_double(),
+  ..   Social = col_double(),
+  ..   Activity_Budget_Ref = col_character()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>KC <span class="ot">&lt;-</span> KC <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">logHR =</span> <span class="fu">log</span>(HomeRange_km2),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">logBM =</span> <span class="fu">log</span>(Body_mass_female_mean) <span class="co"># Creating new variables with log transformations</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(logHR) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(logBM))  <span class="co"># Remove rows with missing values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="running-the-linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="running-the-linear-regression">Running the linear regression</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(logHR <span class="sc">~</span> logBM, <span class="at">data =</span> KC) <span class="co"># Running the linear regression</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model) <span class="co"># Viewing the model summary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = logHR ~ logBM, data = KC)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.3929 -0.9433 -0.0126  1.0944  3.6826 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -9.44123    0.67293  -14.03   &lt;2e-16 ***
+logBM        1.03643    0.08488   12.21   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.423 on 135 degrees of freedom
+Multiple R-squared:  0.5248,    Adjusted R-squared:  0.5213 
+F-statistic: 149.1 on 1 and 135 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>coefficients <span class="ot">&lt;-</span> <span class="fu">coef</span>(model)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)<span class="sc">$</span>coefficients[, <span class="st">"Std. Error"</span>] <span class="co"># Extracting coefficients and their standard errors</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="bootstrapping-the-regression" class="level3">
+<h3 class="anchored" data-anchor-id="bootstrapping-the-regression">Bootstrapping the Regression</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>n_boot <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># Setting the number of bootstrap samples</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>boot_coefs <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> n_boot, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(boot_coefs) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Intercept"</span>, <span class="st">"Slope"</span>) <span class="co"># Initializing matrices to store bootstrap results</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Now let's do Bootstrap Bill!</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># For reproducibility</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_boot) {</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  boot_sample <span class="ot">&lt;-</span> KC[<span class="fu">sample</span>(<span class="fu">nrow</span>(KC), <span class="at">replace =</span> <span class="cn">TRUE</span>), ] <span class="co"># Sample with replacement</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  boot_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(logHR <span class="sc">~</span> logBM, <span class="at">data =</span> boot_sample) <span class="co"># Fitting the model to the bootstrap sample</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  boot_coefs[i, ] <span class="ot">&lt;-</span> <span class="fu">coef</span>(boot_model) <span class="co"># Storing the coefficients</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="analyzing-bootstrap-results" class="level3">
+<h3 class="anchored" data-anchor-id="analyzing-bootstrap-results">Analyzing Bootstrap Results</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating bootstrap statistics</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>boot_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(boot_coefs, <span class="dv">2</span>, mean)<span class="co"># Mean of bootstrap coefficients</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>boot_se <span class="ot">&lt;-</span> <span class="fu">apply</span>(boot_coefs, <span class="dv">2</span>, sd) <span class="co"># Bootstrap standard error</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>boot_ci <span class="ot">&lt;-</span> <span class="fu">apply</span>(boot_coefs, <span class="dv">2</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="co"># Bootstrap 95% CI</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Coefficient =</span> <span class="fu">c</span>(<span class="st">"Intercept"</span>, <span class="st">"Slope"</span>),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">Original_Estimate =</span> coefficients,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Original_SE =</span> se,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Original_CI_lower =</span> coefficients <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Original_CI_upper =</span> coefficients <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Bootstrap_Mean =</span> boot_mean,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Bootstrap_SE =</span> boot_se,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">Bootstrap_CI_lower =</span> boot_ci[<span class="dv">1</span>, ],</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Bootstrap_CI_upper =</span> boot_ci[<span class="dv">2</span>, ]</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>) <span class="co"># Comparing with original model results</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(comparison) <span class="co"># Lets see it</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Coefficient Original_Estimate Original_SE Original_CI_lower
+(Intercept)   Intercept         -9.441231  0.67293459       -10.7601832
+logBM             Slope          1.036432  0.08487709         0.8700724
+            Original_CI_upper Bootstrap_Mean Bootstrap_SE Bootstrap_CI_lower
+(Intercept)         -8.122280      -9.407791   0.58487983        -10.5764074
+logBM                1.202791       1.031645   0.07614911          0.8864948
+            Bootstrap_CI_upper
+(Intercept)          -8.290899
+logBM                 1.180464</code></pre>
+</div>
+</div>
+</section>
+<section id="creating-a-bootstrap-function-extra-credit" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-bootstrap-function-extra-credit">Creating a Bootstrap Function (extra credit)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>bootstrap_lm <span class="ot">&lt;-</span> <span class="cf">function</span>(d, model_formula, <span class="at">conf.level =</span> <span class="fl">0.95</span>, <span class="at">n =</span> <span class="dv">1000</span>) <span class="co"># Function for bootstrapping linear models</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>original_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">as.formula</span>(model_formula), <span class="at">data =</span> d) <span class="co"># Fitting the original model</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>original_coef <span class="ot">&lt;-</span> <span class="fu">coef</span>(original_model)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>original_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(original_model)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>original_se <span class="ot">&lt;-</span> original_summary<span class="sc">$</span>coefficients[, <span class="st">"Std. Error"</span>] <span class="co"># Extracting original coefficients and SEs</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> conf.level</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>original_ci_lower <span class="ot">&lt;-</span> original_coef <span class="sc">-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> alpha<span class="sc">/</span><span class="dv">2</span>) <span class="sc">*</span> original_se</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>original_ci_upper <span class="ot">&lt;-</span> original_coef <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> alpha<span class="sc">/</span><span class="dv">2</span>) <span class="sc">*</span> original_se <span class="co"># Calculate original CIs</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>boot_coefs <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> n, <span class="at">ncol =</span> <span class="fu">length</span>(original_coef))</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(boot_coefs) <span class="ot">&lt;-</span> <span class="fu">names</span>(original_coef) <span class="co"># Initializing the matrix for bootstrap coefficients</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>boot_sample <span class="ot">&lt;-</span> d[<span class="fu">sample</span>(<span class="fu">nrow</span>(d), <span class="at">replace =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>boot_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">as.formula</span>(model_formula), <span class="at">data =</span> boot_sample)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>boot_coefs[i, ] <span class="ot">&lt;-</span> <span class="fu">coef</span>(boot_model)</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>} <span class="co"># Performing bootstrapping</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>boot_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(boot_coefs, <span class="dv">2</span>, mean)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>boot_se <span class="ot">&lt;-</span> <span class="fu">apply</span>(boot_coefs, <span class="dv">2</span>, sd)</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>boot_ci <span class="ot">&lt;-</span> <span class="fu">apply</span>(boot_coefs, <span class="dv">2</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(alpha<span class="sc">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="sc">-</span> alpha<span class="sc">/</span><span class="dv">2</span>)) <span class="co"># Calculating bootstrap statistics</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="at">Coefficient =</span> <span class="fu">names</span>(original_coef),</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="at">Original_Estimate =</span> original_coef,</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="at">Original_SE =</span> original_se,</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="at">Original_CI_lower =</span> original_ci_lower,</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="at">Original_CI_upper =</span> original_ci_upper,</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="at">Bootstrap_Mean =</span> boot_mean,</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="at">Bootstrap_SE =</span> boot_se,</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="at">Bootstrap_CI_lower =</span> boot_ci[<span class="dv">1</span>, ],</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="at">Bootstrap_CI_upper =</span> boot_ci[<span class="dv">2</span>, ]</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>) <span class="co"># Creating result dataframe</span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(result)</span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>boot_results <span class="ot">&lt;-</span> <span class="fu">bootstrap_lm</span>(</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> KC,</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>  <span class="at">model_formula =</span> <span class="st">"logHR ~ logBM"</span>,</span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">1000</span></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>) <span class="co"># An example</span></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(boot_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Coefficient Original_Estimate Original_SE Original_CI_lower
+(Intercept) (Intercept)         -9.441231  0.67293459       -10.7601589
+logBM             logBM          1.036432  0.08487709         0.8700755
+            Original_CI_upper Bootstrap_Mean Bootstrap_SE Bootstrap_CI_lower
+(Intercept)         -8.122304      -9.471685   0.58375006        -10.6128666
+logBM                1.202788       1.039657   0.07424384          0.8943319
+            Bootstrap_CI_upper
+(Intercept)          -8.358391
+logBM                 1.188797</code></pre>
+</div>
+</div>
+</section>
+<section id="plot-bootstrap-results-extra-extra-credit" class="level3">
+<h3 class="anchored" data-anchor-id="plot-bootstrap-results-extra-extra-credit">Plot Bootstrap Results (Extra Extra Credit)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plot_bootstrap_convergence <span class="ot">&lt;-</span> <span class="cf">function</span>(d, model_formula, <span class="at">max_boots =</span> <span class="dv">200</span>, <span class="at">step =</span> <span class="dv">10</span>) <span class="co"># Function to plot bootstrap convergence</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>original_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">as.formula</span>(model_formula), <span class="at">data =</span> d)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>original_coef <span class="ot">&lt;-</span> <span class="fu">coef</span>(original_model) <span class="co"># Fitting the original model</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>boot_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">10</span>, max_boots, <span class="at">by =</span> step) <span class="co"># Creating the sequence of bootstrap numbers</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">list</span>() <span class="co"># Initializing the list to store results</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(boot_seq)) {</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> boot_seq[i] <span class="co"># Running bootstraps at each step</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>boot_coefs <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> n, <span class="at">ncol =</span> <span class="fu">length</span>(original_coef))</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(boot_coefs) <span class="ot">&lt;-</span> <span class="fu">names</span>(original_coef)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>boot_sample <span class="ot">&lt;-</span> d[<span class="fu">sample</span>(<span class="fu">nrow</span>(d), <span class="at">replace =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>boot_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">as.formula</span>(model_formula), <span class="at">data =</span> boot_sample)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>boot_coefs[j, ] <span class="ot">&lt;-</span> <span class="fu">coef</span>(boot_model)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>} <span class="co"># Performing bootstrap</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>boot_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(boot_coefs, <span class="dv">2</span>, mean)</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>boot_se <span class="ot">&lt;-</span> <span class="fu">apply</span>(boot_coefs, <span class="dv">2</span>, sd)</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>boot_ci <span class="ot">&lt;-</span> <span class="fu">apply</span>(boot_coefs, <span class="dv">2</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="co"># Calculating statistics</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>results[[i]] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="at">n_boots =</span> n,</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="at">Coefficient =</span> <span class="fu">names</span>(original_coef),</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="at">Original =</span> original_coef,</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="at">Bootstrap_Mean =</span> boot_mean,</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a><span class="at">Bootstrap_SE =</span> boot_se,</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a><span class="at">Bootstrap_CI_lower =</span> boot_ci[<span class="dv">1</span>, ],</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a><span class="at">Bootstrap_CI_upper =</span> boot_ci[<span class="dv">2</span>, ]</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>) <span class="co"># Storing the results</span></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>all_results <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, results) <span class="co"># Combining all results</span></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (coef <span class="cf">in</span> <span class="fu">names</span>(original_coef)) {</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>coef_data <span class="ot">&lt;-</span> all_results[all_results<span class="sc">$</span>Coefficient <span class="sc">==</span> coef, ]</span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(coef_data, <span class="fu">aes</span>(<span class="at">x =</span> n_boots)) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">unique</span>(coef_data<span class="sc">$</span>Original), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Bootstrap_Mean), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Bootstrap_CI_lower, <span class="at">ymax =</span> Bootstrap_CI_upper), <span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">fill =</span> <span class="st">"blue"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Bootstrap Convergence for"</span>, coef), <span class="at">x =</span> <span class="st">"Number of Bootstraps"</span>, <span class="at">y =</span> <span class="st">"Coefficient Value"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting for each coefficient    </span></span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>plots[[coef]] <span class="ot">&lt;-</span> p</span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(plots)</span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>convergence_plots <span class="ot">&lt;-</span> <span class="fu">plot_bootstrap_convergence</span>(</span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a><span class="at">d =</span> KC,</span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a><span class="at">model_formula =</span> <span class="st">"logHR ~ logBM"</span>,</span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a><span class="at">max_boots =</span> <span class="dv">200</span>,</span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a><span class="at">step =</span> <span class="dv">10</span></span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>) <span class="co"># An Example</span></span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a>convergence_plots<span class="sc">$</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sghorui_OriginalHomeworkCode_04_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>convergence_plots<span class="sc">$</span>logBM <span class="co"># Displaying the plots</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sghorui_OriginalHomeworkCode_04_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
